@@ -19,7 +19,7 @@ public class EcritureComptableTest {
         System.out.println(" S t a r t - U P ");
         list = new ArrayList<>(Arrays.asList("test1", "test2"));
     }
-
+ 
     private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
         BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
         BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
