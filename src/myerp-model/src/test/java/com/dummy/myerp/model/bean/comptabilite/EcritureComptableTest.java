@@ -30,7 +30,7 @@ public class EcritureComptableTest {
         return vRetour;
     }
  
-    @Test
+    @Test 
     public void isEquilibree() {
         EcritureComptable vEcriture;
         vEcriture = new EcritureComptable();
