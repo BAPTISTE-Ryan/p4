@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop" 
+	   xmlns:jpa="http://www.springframework.org/schema/data/jpa" 
+	   xmlns:jee="http://www.springframework.org/schema/jee"
+   	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="	http://www.springframework.org/schema/beans
+                           	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+					        http://www.springframework.org/schema/context
+					        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+					        http://www.springframework.org/schema/tx
+					        http://www.springframework.org/schema/tx/spring-tx.xsd
+					        http://www.springframework.org/schema/data/jpa
+					        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+					 		http://www.springframework.org/schema/mvc
+					 		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           ">
 
     <!-- ====================   Business-Proxy   ==================== -->
 
@@ -26,7 +42,7 @@
 
 
     <!-- ========== SQL ========== -->
-    <import resource="classpath:com.dummy.myerp.consumer.sqlContext.xml"/>
+     <!-- <import resource="classpath:com.dummy.myerp.consumer.sqlContext.xml"/> -->
 
     <!-- ====================   CONNEXION A LA BASE DE DONNEES   ==================== -->
     	<!-- Initialization de la data source  -->
