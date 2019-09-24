@@ -15,7 +15,23 @@
         <constructor-arg ref="TransactionManager"/>
     </bean>
 
-
     <!-- ========== Transaction Managers ========== -->
     <import resource="transactionContext.xml"/>
-</beans> 
+
+   <!-- ==================== Databases ==================== -->
+    <bean id="dataSourceMYERP" class="com.dummy.myerp.technical.util.spring.NullFactoryBean">
+        <constructor-arg value="javax.sql.DataSource"/>
+        
+    </bean>
+
+
+    <!-- ========== SQL ========== -->
+    <import resource="classpath:com.dummy.myerp.consumer.sqlContext.xml"/>
+</beans>
+
+    <!-- ====================   Business-Proxy   ==================== -->
+    
+    <!-- ====================   Business-Proxy   ==================== -->
+    
+    
+    

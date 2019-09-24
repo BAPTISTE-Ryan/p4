@@ -24,7 +24,17 @@ public class EcritureComptable {
     /** Journal comptable */
     @NotNull private JournalComptable journal;
     /** The Reference. */
-    @Pattern(regexp = "\\d{1,5}-\\d{4}/\\d{5}")
+    @Pattern(regexp = "\\W{2}-\\d{4}/\\d{5}")
+    
+    //      33500-2019/15278
+    // 		RG-5 : 	La référence d'une écriture comptable est 
+    // 		composée du code du journal dans lequel figure l'écriture
+    // 		suivi de l'année et d'un numéro de séquence
+    // 		(propre à chaque journal) sur 5 chiffres incrémenté automatiquement 
+    // 		à chaque écriture. Le formatage de la référence est : XX-AAAA/#####.
+    // 		Ex : Journal de banque (BQ), écriture au 31/12/2016
+    // 		--> BQ-2016/00001
+    
     private String reference;
     /** The Date. */
     @NotNull private Date date;
@@ -103,9 +113,9 @@ public class EcritureComptable {
                 vRetour = vRetour.add(vLigneEcritureComptable.getCredit());
             }
         }
-        return vRetour;
+        return vRetour; 
     }
-
+ 
     /**
      * Renvoie si l'écriture est équilibrée (TotalDebit = TotalCrédit)
      * @return boolean
@@ -118,7 +128,7 @@ public class EcritureComptable {
         	return false;
         }
     }
-
+ 
     // ==================== Méthodes ====================
     @Override
     public String toString() {
@@ -137,4 +147,10 @@ public class EcritureComptable {
             .append("}");
         return vStB.toString();
     }
+    
+    
+ 
+    
+    
+    
 }

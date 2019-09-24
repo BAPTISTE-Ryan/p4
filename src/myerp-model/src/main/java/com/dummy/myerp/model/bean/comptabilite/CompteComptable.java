@@ -79,7 +79,7 @@ public class CompteComptable {
 
 
     // ==================== Méthodes STATIC ====================
-    /**
+    /** 
      * Renvoie le {@link CompteComptable} de numéro {@code pNumero} s'il est présent dans la liste
      *
      * @param pList la liste où chercher le {@link CompteComptable}

@@ -78,13 +78,14 @@ public class JournalComptable {
      * @param pCode le code du {@link JournalComptable} à chercher
      * @return {@link JournalComptable} ou {@code null}
      */
+    // FIXME make unit test 
     public static JournalComptable getByCode(List<? extends JournalComptable> pList, String pCode) {
         JournalComptable vRetour = null;
         for (JournalComptable vBean : pList) {
             if (vBean != null && Objects.equals(vBean.getCode(), pCode)) {
                 vRetour = vBean;
                 break;
-            }
+            } 
         }
         return vRetour;
     }

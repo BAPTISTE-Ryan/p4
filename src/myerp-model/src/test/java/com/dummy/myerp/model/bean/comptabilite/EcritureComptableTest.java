@@ -1,5 +1,6 @@
 package com.dummy.myerp.model.bean.comptabilite;
 
+import java.util.regex.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,57 +13,56 @@ import org.junit.Test;
 
 public class EcritureComptableTest {
 
-    private List<String> list;
+	private List<String> list;
 
-    @Before
-    public void init() {
-        System.out.println(" S t a r t - U P ");
-        list = new ArrayList<>(Arrays.asList("test1", "test2"));
-    }
+	private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
+		BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
+		BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
+		String vLibelle = ObjectUtils.defaultIfNull(vDebit, BigDecimal.ZERO)
+				.subtract(ObjectUtils.defaultIfNull(vCredit, BigDecimal.ZERO)).toPlainString();
+		LigneEcritureComptable vRetour = new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
+				vLibelle, vDebit, vCredit);
+		return vRetour;
+	}
  
-    private LigneEcritureComptable createLigne(Integer pCompteComptableNumero, String pDebit, String pCredit) {
-        BigDecimal vDebit = pDebit == null ? null : new BigDecimal(pDebit);
-        BigDecimal vCredit = pCredit == null ? null : new BigDecimal(pCredit);
-        String vLibelle = ObjectUtils.defaultIfNull(vDebit, BigDecimal.ZERO)
-                .subtract(ObjectUtils.defaultIfNull(vCredit, BigDecimal.ZERO)).toPlainString();
-        LigneEcritureComptable vRetour = new LigneEcritureComptable(new CompteComptable(pCompteComptableNumero),
-                vLibelle, vDebit, vCredit);
-        return vRetour;
-    }
- 
-    @Test 
-    public void isEquilibree() {
-        EcritureComptable vEcriture;
-        vEcriture = new EcritureComptable();
+	@Test
+	public void isEquilibree() {
+		EcritureComptable vEcriture;
+		vEcriture = new EcritureComptable(); 
 
-        vEcriture.setLibelle("Equilibrée");
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "100.50", "33"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "301"));
-        vEcriture.getListLigneEcriture().add(this.createLigne(2, "40", "7"));
-        Assert.assertTrue(vEcriture.toString(), vEcriture.isEquilibree());
+		vEcriture.setLibelle("Equilibrée");
+		vEcriture.getListLigneEcriture().add(this.createLigne(1, "200.50", null));
+		vEcriture.getListLigneEcriture().add(this.createLigne(1, "100.50", "33"));
+		vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "301"));
+		vEcriture.getListLigneEcriture().add(this.createLigne(2, "40", "7"));
+		Assert.assertTrue(vEcriture.toString(), vEcriture.isEquilibree());
 
-    }
+	}
 
-    @Test
-    public void isNotEquilibree() {
-        EcritureComptable vEcriture;
-        vEcriture = new EcritureComptable();
+	@Test
+	public void isNotEquilibree() {
+		EcritureComptable vEcriture;
+		vEcriture = new EcritureComptable();
 
-        vEcriture.setLibelle("Non Equilibrée");
-        vEcriture.getListLigneEcriture().add(this.createLigne(1, "22", "2"));
-        System.out.println(vEcriture);
-        Assert.assertFalse(vEcriture.toString(), vEcriture.isEquilibree());
-        System.out.println(vEcriture.toString());
-        System.out.println(vEcriture.isEquilibree());
-        Assert.assertFalse(vEcriture.toString(), vEcriture.isEquilibree());
-    }
+		vEcriture.setLibelle("Non Equilibrée");
+		vEcriture.getListLigneEcriture().add(this.createLigne(1, "22", "2"));
+		System.out.println(vEcriture);
+		Assert.assertFalse(vEcriture.toString(), vEcriture.isEquilibree());
+		System.out.println(vEcriture.toString());
+		System.out.println(vEcriture.isEquilibree());
+		Assert.assertFalse(vEcriture.toString(), vEcriture.isEquilibree());
+	}
 
-    @After
-    public void finalize() {
-        // LOG.info("finalize");
-        System.out.println(" S h u t - D O W N ");
-        list.clear();
-    }
+	// FIXME Se documenter (où se re- documenter) sur Jdbc Template
+	// FIXME Se documenter (où se re- documenter) sur les profiles maven
+	// FIXME Faire ta conf Spring et s'assurer que le test TestInit() passe
+	// DONE Pour l'occasion revoir la regEx de l'attribut reference
+	// FIXME Voir la conf Spring pour le module business
+	// FIXME Se re- documenter sur Jdbc Template
+	// FIXME S'assurer que le test TestInit() passe
+	// FIXME ccheckEcritureComptableUnitRG4
+	// FIXME ccheckEcritureComptableUnitRG5
+	// FIXME couvertre du modele model
+	
 
 }
