@@ -5,7 +5,7 @@
                            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <!-- Transaction Manager -->
-    <bean id="TransactionManager"
+    <bean id="transactionManager"
           class="com.dummy.myerp.business.impl.TransactionManager"
           scope="singleton"
           factory-method="getInstance">
@@ -17,4 +17,20 @@
     <bean id="txManagerMYERP" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSourceMYERP"/>
     </bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </beans>
