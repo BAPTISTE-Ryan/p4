@@ -5,7 +5,7 @@
                            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <!-- Transaction Manager -->
-    <bean id="transactionManager"
+    <bean id="TransactionManager"
           class="com.dummy.myerp.business.impl.TransactionManager"
           scope="singleton"
           factory-method="getInstance">
