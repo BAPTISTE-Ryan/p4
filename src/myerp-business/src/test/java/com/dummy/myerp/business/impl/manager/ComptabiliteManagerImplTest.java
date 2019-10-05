@@ -18,7 +18,7 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
 
  // FIXME tuto sur la gestions des exceptions en java
  // FIXME tuto sur jdbc template
-    //@Test
+    @Test
     public void checkEcritureComptableUnit() throws Exception {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
@@ -41,7 +41,7 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
 
-    //@Test(expected = FunctionalException.class)
+    @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG2() throws Exception {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
@@ -57,7 +57,7 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
 
-    //@Test(expected = FunctionalException.class)
+    @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG3() throws Exception {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
