@@ -24,7 +24,7 @@ public class EcritureComptable {
     /** Journal comptable */
     @NotNull private JournalComptable journal;
     /** The Reference. */
-    @Pattern(regexp = "\\W{2}-\\d{4}/\\d{5}")
+    //@Pattern(regexp = "\\W{2}-\\d{4}/\\d{5}")
     
     //      33500-2019/15278
     // 		RG-5 : 	La référence d'une écriture comptable est 
@@ -47,7 +47,7 @@ public class EcritureComptable {
     /** La liste des lignes d'écriture comptable. */
     @Valid
     @Size(min = 2)
-    private final List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
+    private  List<LigneEcritureComptable> listLigneEcriture = new ArrayList<>();
 
 
     // ==================== Getters/Setters ====================
@@ -83,6 +83,10 @@ public class EcritureComptable {
     }
     public List<LigneEcritureComptable> getListLigneEcriture() {
         return listLigneEcriture;
+    }
+
+    public void setListLigneEcriture(List<LigneEcritureComptable> plistLigneEcriture) {
+         listLigneEcriture = plistLigneEcriture;
     }
 
     /**

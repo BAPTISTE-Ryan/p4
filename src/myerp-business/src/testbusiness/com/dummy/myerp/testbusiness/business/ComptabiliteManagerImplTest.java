@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 //////////
@@ -94,6 +95,23 @@ public class ComptabiliteManagerImplTest extends BusinessTestCase {
          ecritureComptable.setLibelle("2");
          ecritureComptable.setReference(g);
          ecritureComptable.setDate(pDate);
+         List<LigneEcritureComptable> plistLigneEcriture = new ArrayList<LigneEcritureComptable>();
+         
+         LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable();
+         CompteComptable pCompteComptable= new CompteComptable();
+         ligneEcritureComptable.setCompteComptable( pCompteComptable);
+         BigDecimal pCredit= new BigDecimal(7643);
+         ligneEcritureComptable.setCredit(pCredit);
+         BigDecimal pDebit= new BigDecimal(7643);
+         ligneEcritureComptable.setDebit(pDebit);
+         String pLibelle = "pLibelle";
+         
+         ligneEcritureComptable.setLibelle(pLibelle);
+         plistLigneEcriture.add( ligneEcritureComptable);
+         plistLigneEcriture.add( ligneEcritureComptable);
+         plistLigneEcriture.add( ligneEcritureComptable);
+         
+		 ecritureComptable.setListLigneEcriture(plistLigneEcriture );
          
          ecritureComptable.getJournal();
          ecritureComptable.getLibelle();
