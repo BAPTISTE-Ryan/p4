@@ -133,6 +133,18 @@ public class EcritureComptable {
         }
     }
  
+    
+    public EcritureComptable getEcritureComptableByRef(Integer pid){
+		
+    	Integer Id = this.id;
+    	
+    	
+    	return null;
+    }
+    
+    
+    
+    
     // ==================== Méthodes ====================
     @Override
     public String toString() {
