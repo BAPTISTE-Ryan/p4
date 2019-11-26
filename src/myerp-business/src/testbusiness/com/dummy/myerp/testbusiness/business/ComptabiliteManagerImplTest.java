@@ -33,7 +33,7 @@ import javax.validation.constraints.AssertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
+//import org.mockito.InjectMocks;
 
 import com.dummy.myerp.business.impl.manager.ComptabiliteManagerImpl;
 import com.dummy.myerp.consumer.dao.contrat.DaoProxy;
@@ -115,7 +115,7 @@ public class ComptabiliteManagerImplTest extends BusinessTestCase {
 		}
 	}
 
-	@InjectMocks
+	//@InjectMocks
 	DaoProxy pDaoProxy;
 
 	@Test()
