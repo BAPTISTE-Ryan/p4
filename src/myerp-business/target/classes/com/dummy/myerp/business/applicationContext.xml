@@ -12,7 +12,7 @@
           scope="singleton"
           factory-method="getInstance">
 
-        <constructor-arg ref="daoProxy"/>
+        <constructor-arg ref="DaoProxy"/>
         <constructor-arg ref="TransactionManager"/>
     </bean>
 

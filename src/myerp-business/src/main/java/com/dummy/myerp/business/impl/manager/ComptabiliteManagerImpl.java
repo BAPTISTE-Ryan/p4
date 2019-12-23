@@ -140,6 +140,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     }
 
 
+
     /**
      * Vérifie que l'Ecriture comptable respecte les règles de gestion liées au contexte
      * (unicité de la référence, année comptable non cloturé...)
@@ -154,6 +155,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                 // Recherche d'une écriture ayant la même référence
             	DaoProxy daoproxy = getDaoProxy();
             	ComptabiliteDao compdao = daoproxy.getComptabiliteDao();
+            	System.out.println("here :"+daoproxy.toString());
             	String ref = pEcritureComptable.getReference();
             	EcritureComptable ecricomp = compdao.getEcritureComptableByRef(ref);
                 EcritureComptable vECRef = getDaoProxy().getComptabiliteDao().getEcritureComptableByRef(pEcritureComptable.getReference());

@@ -7,7 +7,7 @@
 
     <!-- ==================== Consumer Context ==================== -->
     <!-- DaoProxy -->
-    <bean id="daoProxy" class="com.dummy.myerp.consumer.dao.impl.DaoProxyImpl" factory-method="getInstance"/>
+    <bean id="DaoProxy" class="com.dummy.myerp.consumer.dao.impl.DaoProxyImpl" factory-method="getInstance"/>
 
     <!-- ==================== Business Context ==================== -->
     <import resource="classpath:/com/dummy/myerp/business/applicationContext.xml"/>
@@ -21,7 +21,21 @@
     </bean>
 
 
-
+    <!-- AbstractDbConsumer   <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="com.dummy.myerp.consumer.db.AbstractDbConsumer"/>
+        <property name="targetMethod" value="configure"/>
+        <property name="arguments">
+            <map>
+                <entry value-ref="dataSourceMYERP">
+                    <key>
+                        <value type="com.dummy.myerp.consumer.db.DataSourcesEnum">MYERP</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>-->
+   
+<import resource="classpath:/com/dummy/myerp/business/sqlContext.xml"/>
 
 
 

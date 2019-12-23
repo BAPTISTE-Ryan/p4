@@ -1,16 +1,20 @@
 package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 
+import com.dummy.myerp.consumer.dao.impl.db.dao.ComptabiliteDaoImpl;
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
 import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
 import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
 import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
 import com.dummy.myerp.testbusiness.business.BusinessTestCase;
+import com.dummy.myerp.testbusiness.business.SpringRegistry;
 
 
 public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
@@ -18,8 +22,58 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
 
  // FIXME tuto sur la gestions des exceptions en java
  // FIXME tuto sur jdbc template
+    
+    
+    
+
+	public EcritureComptable initilizsation() {
+	String g = "33500-2019/15278";
+	EcritureComptable ecritureComptable = new EcritureComptable();
+	JournalComptable pJournal = new JournalComptable();
+	pJournal.setCode(g);
+	pJournal.setLibelle(g);
+    
+	ecritureComptable.setId(1);
+	Date pDate = new Date();
+	pDate.setTime(1571244332105L);
+    
+	ecritureComptable.setJournal(pJournal);
+	ecritureComptable.setLibelle("BQ-2016/00003");
+	ecritureComptable.setReference(g);
+	ecritureComptable.setDate(pDate);
+	List<LigneEcritureComptable> plistLigneEcriture = new ArrayList<LigneEcritureComptable>();
+    
+	LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable();
+	CompteComptable pCompteComptable = new CompteComptable();
+	ligneEcritureComptable.setCompteComptable(pCompteComptable);
+	BigDecimal pCredit = new BigDecimal(7643);
+	ligneEcritureComptable.setCredit(pCredit);
+	BigDecimal pDebit = new BigDecimal(7643);
+	ligneEcritureComptable.setDebit(pDebit);
+	String pLibelle = "pLibelle";
+    
+	ligneEcritureComptable.setLibelle(pLibelle);
+	plistLigneEcriture.add(ligneEcritureComptable);
+	plistLigneEcriture.add(ligneEcritureComptable);
+	plistLigneEcriture.add(ligneEcritureComptable);
+    
+	ecritureComptable.setListLigneEcriture(plistLigneEcriture);
+    
+	ecritureComptable.getJournal();
+	ecritureComptable.getLibelle();
+	ecritureComptable.getReference();
+	ecritureComptable.getDate();
+	ecritureComptable.getId();
+	ecritureComptable.getListLigneEcriture();
+	return ecritureComptable;
+	}
+	
+
+
+    
+    
     @Test
-    public void checkEcritureComptableUnit() throws Exception {
+    public void checkEcritureComptableUnitTest() throws FunctionalException  {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
         vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
@@ -33,14 +87,16 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
                                                                                  new BigDecimal(123)));
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
- 
+
+    
+    
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitViolation() throws Exception {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
-        manager.checkEcritureComptableUnit(vEcritureComptable);
+   manager.checkEcritureComptableUnit(vEcritureComptable);
+    
     }
-
     @Test(expected = FunctionalException.class)
     public void checkEcritureComptableUnitRG2() throws Exception {
         EcritureComptable vEcritureComptable;
@@ -72,6 +128,140 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
                                                                                  null));
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
+    
+    
+
+   
+
+	@Test()
+	public void checkEcritureComptableUnitDao() {
+
+		SpringRegistry.init();
+		ComptabiliteManagerImpl comptabiliteManagerImpl = new ComptabiliteManagerImpl();
+		try {
+			SpringRegistry.getBusinessProxy().getComptabiliteManager()  ;
+			
+System.out.println(SpringRegistry.getBusinessProxy().getComptabiliteManager().getListEcritureComptable());
+			
+			
+			EcritureComptable ecriture = initilizsation();
+			System.out.println(ecriture.getLibelle());
+			comptabiliteManagerImpl.checkEcritureComptable(ecriture);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+    
+	@Test()
+    public void testUpdateEcritureComptable() throws FunctionalException {	
+		SpringRegistry.init();
+		try {
+		ComptabiliteManagerImpl comptabiliteManagerImpl = new ComptabiliteManagerImpl();
+	
+		comptabiliteManagerImpl.updateEcritureComptable(initilizsation());} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		@Test()
+		public void testInsertEcritureComptable() throws FunctionalException  {
+		
+		SpringRegistry.init();
+		try {
+		ComptabiliteManagerImpl comptabiliteManagerImpl = new ComptabiliteManagerImpl();
+	
+	    comptabiliteManagerImpl.insertEcritureComptable(initilizsation());} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		/*
+		@Test()
+		public void testCheckEcritureComptableContext() throws FunctionalException  {
+		
+		SpringRegistry.init();
+		ComptabiliteManagerImpl comptabiliteManagerImpl = new ComptabiliteManagerImpl();
+		String g = "33500-2019/15278";
+		EcritureComptable ecritureComptable = new EcritureComptable();
+		JournalComptable pJournal = new JournalComptable();
+		pJournal.setCode(g);
+		pJournal.setLibelle(g);
+		ecritureComptable.setId(1);
+		Date pDate = new Date();
+		pDate.setTime(1571244332105L);
+		ecritureComptable.setJournal(pJournal);
+		ecritureComptable.setLibelle("2");
+		ecritureComptable.setReference(g);
+		ecritureComptable.setDate(pDate);
+		List<LigneEcritureComptable> plistLigneEcriture = new ArrayList<LigneEcritureComptable>();
+		LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable();
+		CompteComptable pCompteComptable = new CompteComptable();
+		ligneEcritureComptable.setCompteComptable(pCompteComptable);
+		BigDecimal pCredit = new BigDecimal(7643);
+		ligneEcritureComptable.setCredit(pCredit);
+		BigDecimal pDebit = new BigDecimal(743);
+		ligneEcritureComptable.setDebit(pDebit);
+		String pLibelle = "pLibelle";
+		ligneEcritureComptable.setLibelle(pLibelle);
+		plistLigneEcriture.add(ligneEcritureComptable);
+		plistLigneEcriture.add(ligneEcritureComptable);
+		plistLigneEcriture.add(ligneEcritureComptable);
+		ecritureComptable.setListLigneEcriture(plistLigneEcriture);
+		ecritureComptable.getJournal();
+		ecritureComptable.getLibelle();
+		ecritureComptable.getReference();
+		ecritureComptable.getDate();
+		ecritureComptable.getId();
+		ecritureComptable.getListLigneEcriture();
+	
+	
+	    comptabiliteManagerImpl.checkEcritureComptable(ecritureComptable);
+	}
+		
+		
+		@Test()
+		public void testMoinsDeDeuxElementsLignesEcritureComptable() throws FunctionalException  {
+		
+		SpringRegistry.init();
+		ComptabiliteManagerImpl comptabiliteManagerImpl = new ComptabiliteManagerImpl();
+		String g = "33500-2019/15278";
+		EcritureComptable ecritureComptable = new EcritureComptable();
+		JournalComptable pJournal = new JournalComptable();
+		pJournal.setCode(g);
+		pJournal.setLibelle(g);
+		Date pDate = new Date();
+		pDate.setTime(1571244332105L);
+		ecritureComptable.setJournal(pJournal);
+		ecritureComptable.setLibelle("2");
+		ecritureComptable.setReference(g);
+		ecritureComptable.setDate(pDate);
+		List<LigneEcritureComptable> plistLigneEcriture = new ArrayList<LigneEcritureComptable>();
+		LigneEcritureComptable ligneEcritureComptable = new LigneEcritureComptable();
+		CompteComptable pCompteComptable = new CompteComptable();
+		ligneEcritureComptable.setCompteComptable(pCompteComptable);
+		BigDecimal pCredit = new BigDecimal(7643);
+		ligneEcritureComptable.setCredit(pCredit);
+		BigDecimal pDebit = new BigDecimal(743);
+		ligneEcritureComptable.setDebit(pDebit);
+		String pLibelle = "pLibelle";
+		ligneEcritureComptable.setLibelle(pLibelle);
+		ecritureComptable.setListLigneEcriture(plistLigneEcriture);
+		ecritureComptable.getJournal();
+		ecritureComptable.getLibelle();
+		ecritureComptable.getReference();
+		ecritureComptable.getDate();
+		ecritureComptable.getId();
+		ecritureComptable.getListLigneEcriture();
+	
+	
+	    comptabiliteManagerImpl.checkEcritureComptable(ecritureComptable);
+	}
+		*/
+    
+    
     // FIXME ccheckEcritureComptableUnitRG4
     // FIXME ccheckEcritureComptableUnitRG5
 // TODO some todo

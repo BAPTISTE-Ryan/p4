@@ -1,149 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <!-- =============================================================== -->
-    <!-- Project informations -->
-    <!-- =============================================================== -->
-    <!-- ===== Parent ===== -->
-    <parent>
-        <groupId>com.dummy.myerp</groupId>
-        <artifactId>myerp</artifactId>
-        <version>1.x.x-SNAPSHOT</version>
-        <relativePath>..</relativePath>
-    </parent>
+	<!-- =============================================================== -->
+	<!-- Project informations -->
+	<!-- =============================================================== -->
+	<!-- ===== Parent ===== -->
+	<parent>
+		<groupId>com.dummy.myerp</groupId>
+		<artifactId>myerp</artifactId>
+		<version>1.x.x-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
 
-    <!-- ===== Maven ===== -->
-    <artifactId>myerp-business</artifactId>
+	<!-- ===== Maven ===== -->
+	<artifactId>myerp-business</artifactId>
 
-    <!-- ===== General information ===== -->
-    <name>${project.artifactId}</name>
-
-
-    <!-- =============================================================== -->
-    <!-- Distrubution management -->
-    <!-- =============================================================== -->
-    <distributionManagement>
-        <site>
-            <id>site</id>
-            <name>site-doc</name>
-            <url>file://${basedir}/../target/site-doc/${project.artifactId}/</url>
-        </site>
-    </distributionManagement>
+	<!-- ===== General information ===== -->
+	<name>${project.artifactId}</name>
 
 
-    <!-- =============================================================== -->
-    <!-- Properties -->
-    <!-- =============================================================== -->
-    <properties>
-    </properties>
+	<!-- =============================================================== -->
+	<!-- Distrubution management -->
+	<!-- =============================================================== -->
+	<distributionManagement>
+		<site>
+			<id>site</id>
+			<name>site-doc</name>
+			<url>file://${basedir}/../target/site-doc/${project.artifactId}/</url>
+		</site>
+	</distributionManagement>
 
 
-    <!-- =============================================================== -->
-    <!-- Dependencies -->
-    <!-- =============================================================== -->
-    <dependencies>
-        <!-- ===== Modules ===== -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>myerp-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>myerp-consumer</artifactId>
-        </dependency>
-
-        <!-- ===== Spring JDBC/Tx ===== -->
-        <!-- spring-tx : transaction, JCA, DAO -->
-  
-
-        <!-- ===== JSR 303 - Bean validation ===== -->
-        <!-- implementation -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
+	<!-- =============================================================== -->
+	<!-- Properties -->
+	<!-- =============================================================== -->
+	<properties>
+	</properties>
 
 
-<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-<dependency>
-    <groupId>org.mockito</groupId>
-    <artifactId>mockito-all</artifactId>
-    <version>1.9.5</version>
-    <scope>test</scope>
-</dependency>
+	<!-- =============================================================== -->
+	<!-- Dependencies -->
+	<!-- =============================================================== -->
+	<dependencies>
+		<!-- ===== Modules ===== -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>myerp-model</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>myerp-consumer</artifactId>
+		</dependency>
+
+		<!-- ===== Spring JDBC/Tx ===== -->
+		<!-- spring-tx : transaction, JCA, DAO -->
 
 
-        <!-- ========== Test Dependencies ========== -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- ===== Database (pour les tests) ===== -->
-        <!-- Pool de connexion -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-dbcp2</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- Drivers JDBC PostgreSQL -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+		<!-- ===== JSR 303 - Bean validation ===== -->
+		<!-- implementation -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
 
 
-    <!-- =======Coding from a different computer test code==================== -->
-    <!-- =============================================================== -->
-    <!-- Profiles -->
-    <!-- =============================================================== -->
-    <profiles>
-        <!-- Profile utilisé pour lancer les tests d'intégration de la couche Business -->
-        <profile>
-            <id>test-business</id>
-            <build>
-                <plugins>
-                    <!-- Ajout du répertoire src/test-business/java en tant que source de test du module -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>add-test-source</id>
-                                <phase>generate-test-sources</phase>
-                                <goals>
-                                    <goal>add-test-source</goal>
-                                </goals>
-                                <configuration>
-                                    <sources>
-                                        <source>src/testbusiness</source>
-                                    </sources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-                <testResources>
-                    <testResource>
-                        <directory>src/test/resources</directory>
-                    </testResource>
-                    <testResource>
-                        <directory>src/test-business/resources</directory>
-                    </testResource>
-                </testResources>
-            </build>
-        </profile>
-    </profiles>
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
 
 
-    <!-- =============================================================== -->
-    <!-- Build -->
-    <!-- =============================================================== -->
-    <build>
-    </build>
+		<!-- ========== Test Dependencies ========== -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- ========== JaCoCo ========== -->
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.2</version>
+		</dependency>
+		<!-- ===== Database (pour les tests) ===== -->
+		<!-- Pool de connexion -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Drivers JDBC PostgreSQL -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+
+	<!-- =======Coding from a different computer test code==================== -->
+	<!-- =============================================================== -->
+	<!-- Profiles -->
+	<!-- =============================================================== -->
+	<profiles>
+		<!-- Profile utilisé pour lancer les tests d'intégration de la couche Business -->
+		<profile>
+			<id>test-business</id>
+			<build>
+
+				<plugins>
+				 
+
+ 
+
+
+	<plugin>
+		<groupId>org.jacoco</groupId>
+		<artifactId>jacoco-maven-plugin</artifactId>
+		<version>0.8.3</version>
+		<executions>
+		
+			<execution>
+				<id>coverage-initialize</id>
+				<goals>
+					<goal>prepare-agent</goal>
+				</goals>
+			</execution>
+			
+			<execution>
+				<id>coverage-report</id>
+				<phase>post-integration-test</phase>
+				<goals>
+					<goal>report</goal>
+				</goals>
+			</execution>
+			
+			<!-- Threshold -->
+			<execution>
+			
+				<id>coverage-check</id>
+				<goals>
+					<goal>check</goal>
+				</goals>
+				
+				<configuration>
+				    <includeTests>true</includeTests>
+				
+					<rules>
+						<rule>
+
+							<limits>
+								<limit>
+									<counter>LINE</counter>
+									<value>COVEREDRATIO</value>
+									<minimum>10%</minimum>
+								</limit>
+							</limits>
+						</rule>
+					</rules>
+				</configuration>
+			</execution>
+			
+		</executions>
+	</plugin>
+
+	<!-- Ajout du répertoire src/test-business/java en tant que source de 
+						test du module -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>add-test-source</id>
+								<phase>generate-test-sources</phase>
+								<goals>
+									<goal>add-test-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src/testbusiness</source>
+										<includeTests>true</includeTests>
+									</sources>
+								</configuration>
+								
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+
+				<testResources>
+					<testResource>
+						<directory>src/test/resources</directory>
+					</testResource>
+					<testResource>
+						<directory>src/main/resources</directory>
+					</testResource>
+				</testResources>
+			</build>
+		</profile>
+	</profiles>
+
+
+	<!-- =============================================================== -->
+	<!-- Build -->
+	<!-- =============================================================== -->
+	<build>
+	</build>
 </project>
