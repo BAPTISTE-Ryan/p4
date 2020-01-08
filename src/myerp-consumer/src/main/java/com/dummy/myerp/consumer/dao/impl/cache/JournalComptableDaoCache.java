@@ -3,6 +3,8 @@ package com.dummy.myerp.consumer.dao.impl.cache;
 import java.util.List;
 
 import com.dummy.myerp.consumer.ConsumerHelper;
+import com.dummy.myerp.consumer.dao.contrat.ComptabiliteDao;
+import com.dummy.myerp.consumer.dao.contrat.DaoProxy;
 import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
 
 
@@ -33,7 +35,10 @@ public class JournalComptableDaoCache {
      */
     public JournalComptable getByCode(String pCode) {
         if (listJournalComptable == null) {
-            listJournalComptable = ConsumerHelper.getDaoProxy().getComptabiliteDao().getListJournalComptable();
+        	DaoProxy daoProxy = ConsumerHelper.getDaoProxy();
+        	ComptabiliteDao comptabiliteDao = daoProxy.getComptabiliteDao();
+        	listJournalComptable = 		comptabiliteDao.getListJournalComptable();
+          
         }
 
         JournalComptable vRetour = JournalComptable.getByCode(listJournalComptable, pCode);
