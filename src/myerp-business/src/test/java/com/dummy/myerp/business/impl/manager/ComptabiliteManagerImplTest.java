@@ -86,23 +86,29 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
     }
     
     
-    
-   /* @Test
+        
+   @Test
     public void checkEcritureComptableUnitTest() throws FunctionalException  {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
         vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
         vEcritureComptable.setDate(new Date());
         vEcritureComptable.setLibelle("Libelle");
-        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
-                                               ;                                  null, new BigDecimal(123),
-                                                                                 null));
-        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
-                                                                                 null, null,
-                                                                                 new BigDecimal(123)));
+        LigneEcritureComptable  aze=new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(122),
+                new BigDecimal(122));
+        LigneEcritureComptable  azte=new LigneEcritureComptable(new CompteComptable(2),
+                null, new BigDecimal(122),
+                new BigDecimal(122));
+        
+        vEcritureComptable.getListLigneEcriture().add(aze);
+        vEcritureComptable.getListLigneEcriture().add(azte);
+        vEcritureComptable.setReference("14246");
+        vEcritureComptable.setDate(new Date());
+        vEcritureComptable.setId(1);
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
-*/
+
     
 
     @Test(expected = FunctionalException.class)
@@ -130,10 +136,17 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
 			vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
 			vEcritureComptable.setDate(new Date());
 			vEcritureComptable.setLibelle("Libelle");
+			vEcritureComptable.setReference("Libelle");
+			vEcritureComptable.setId(1);
 			vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
 			                                                                         null, new BigDecimal(123),
 			                                                                         new BigDecimal(123)));
-			manager.checkEcritureComptableUnit(vEcritureComptable);
+			
+			vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                    null, new BigDecimal(123),
+                    new BigDecimal(123)));
+
+			manager.checkEcritureComptable(vEcritureComptable);
 			System.out.println("test de la rg3");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -160,18 +173,27 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
 		//	e.printStackTrace();
 		}
 	}
+	
 		@Test()
-		public void testInsertEcritureComptable() throws FunctionalException  {
+		public void testxtra() throws FunctionalException  {
 		
 		SpringRegistry.init();
-		try {
-		ComptabiliteManagerImpl comptabiliteManagerImpl = new ComptabiliteManagerImpl();
-	
-	    comptabiliteManagerImpl.insertEcritureComptable(initilizsation());} catch (Exception e) {
-			// TODO Auto-generated catch block
-			//System.out.println("third error");
-			//e.printStackTrace();
-		}
+		 try {
+				EcritureComptable vEcritureComptable;
+				vEcritureComptable = new EcritureComptable();
+				//vEcritureComptable = initilizsation();
+				vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+				vEcritureComptable.setDate(new Date());
+				vEcritureComptable.setLibelle("Libelle");
+				vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+				                                                                         null, new BigDecimal(123),
+				                                                                         new BigDecimal(123)));
+				manager.insertEcritureComptable(vEcritureComptable);
+				System.out.println("test de la rgextra3");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 		/*
 		@Test()
@@ -215,7 +237,7 @@ public class ComptabiliteManagerImplTest  extends BusinessTestCase  {
 	
 	    comptabiliteManagerImpl.checkEcritureComptable(ecritureComptable);
 	}
-		
+	
 		
 		@Test()
 		public void testMoinsDeDeuxElementsLignesEcritureComptable() throws FunctionalException  {

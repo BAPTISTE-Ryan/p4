@@ -92,7 +92,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     /**
      * Vérifie que l'Ecriture comptable respecte les règles de gestion unitaires,
      * c'est à dire indépendemment du contexte (unicité de la référence, exercie comptable non cloturé...)
-     *
+//     *
      * @param pEcritureComptable -
      * @throws FunctionalException Si l'Ecriture comptable ne respecte pas les règles de gestion
      */
@@ -149,7 +149,15 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
      */
     protected void checkEcritureComptableContext(EcritureComptable pEcritureComptable) throws FunctionalException {
         // ===== RG_Compta_6 : La référence d'une écriture comptable doit être unique
-        if (StringUtils.isNoneEmpty(pEcritureComptable.getReference())) {
+    	pEcritureComptable.getId();
+    	System.out.println(pEcritureComptable);
+       if(pEcritureComptable.getReference()!=null) {
+    	   for(int i=1;i<20;i++) {
+    		   System.out.println(pEcritureComptable.getReference());
+    		   
+    	   }
+       }
+    	if (StringUtils.isNoneEmpty(pEcritureComptable.getReference())) {
             try {
                 // Recherche d'une écriture ayant la même référence
             	DaoProxy daoproxy = getDaoProxy();
@@ -209,7 +217,7 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
      */
     @Override
     public void deleteEcritureComptable(Integer pId) {
-    	System.out.println();
+    	
         TransactionStatus vTS = getTransactionManager().beginTransactionMyERP();
         try {
             getDaoProxy().getComptabiliteDao().deleteEcritureComptable(pId);
